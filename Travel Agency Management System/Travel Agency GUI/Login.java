@@ -20,7 +20,7 @@ public class Login extends JFrame {
     Login() {
         // Frame Layout
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Travel Agency");
+        this.setTitle("Travel Agency Management System");
         this.setSize(1020, 600);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -58,7 +58,7 @@ public class Login extends JFrame {
         setContentPane(backgroundPanel); // Set custom panel as content pane
 
         // Icon
-        icon = new ImageIcon(getClass().getResource("/images/Icon.png"));
+        icon = new ImageIcon(getClass().getResource("/images/travel_logo.png"));
         this.setIconImage(icon.getImage());
 
         // Logo
