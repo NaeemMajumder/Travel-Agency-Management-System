@@ -47,13 +47,13 @@ public class IntCountries extends JFrame {
 
         // Title
         label1 = new JLabel();
-        label1.setText("Which Country Would");
+        label1.setText("Which Spot on the Map Calls to You?");
         label1.setBounds(430, 25, 500, 50);
         label1.setFont(f1);
         c.add(label1);
         
         label1 = new JLabel();
-        label1.setText("You Like to Visit?");
+        label1.setText("Calls to You?");
         label1.setBounds(430, 60, 500, 50);
         label1.setFont(f1);
         c.add(label1);

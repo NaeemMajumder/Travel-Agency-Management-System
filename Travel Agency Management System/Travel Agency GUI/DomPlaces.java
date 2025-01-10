@@ -5,7 +5,7 @@ import java.awt.event.*;
 public class DomPlaces extends JFrame {
 
     private Container c;
-    private ImageIcon icon;
+    private ImageIcon icon, bg_image;
     private JLabel label1, imgLabel;
     private Font f1, f2, f3;
     private ImageIcon logo;
@@ -18,8 +18,8 @@ public class DomPlaces extends JFrame {
     DomPlaces() {
         // Frame Layout
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Travel Agency");
-        this.setSize(900, 450);
+        this.setTitle("Travel Agency Management System");
+        this.setSize(850, 460);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
@@ -27,72 +27,117 @@ public class DomPlaces extends JFrame {
         c.setLayout(null);
         c.setBackground(Color.decode("#F2F2F2"));
 
+        // Custom Panel for Background
+        JPanel backgroundPanel = new JPanel() {
+            private final Image backgroundImage;
+
+            {
+                // Load the background image
+                bg_image = new ImageIcon(getClass().getResource("/images/domestic_page.jpg"));
+                backgroundImage = bg_image.getImage();
+            }
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+
+                // Draw the background image with opacity, scaled to fit panel dimensions
+                float opacity = 0.2f; // Adjust as needed
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+                g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
+                // Reset the composite to default for other components
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+            }
+        };
+
+        backgroundPanel.setLayout(null); // Use null layout for custom positioning
+        setContentPane(backgroundPanel); // Set custom panel as content pane
+
         // Icon
-        icon = new ImageIcon(getClass().getResource("/images/Icon.png"));
+        icon = new ImageIcon(getClass().getResource("/images/travel_logo.png"));
         this.setIconImage(icon.getImage());
 
-        // Logo
-        logo = new ImageIcon(getClass().getResource("/images/LogoBlue.png"));
-        imgLabel = new JLabel(logo);
-        imgLabel.setBounds(30, 50, logo.getIconWidth(), logo.getIconHeight());
-        c.add(imgLabel);
+        // logo
+        ImageIcon logo = new ImageIcon(getClass().getResource("/images/travel_logo.png"));
+        Image logoImage = logo.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon logoScaled = new ImageIcon(logoImage);
+
+        imgLabel = new JLabel(logoScaled);
+        imgLabel.setBounds(380, -20, 400, 400);
+        backgroundPanel.add(imgLabel);
 
         // Fonts
-        f1 = new Font("Segoe UI Black", Font.PLAIN, 35);
-        f2 = new Font("Segoe UI Semibold", Font.PLAIN, 20);
-        f3 = new Font("Segoe UI Black", Font.PLAIN, 25);
+        f1 = new Font("Serif", Font.BOLD, 30);
+        f2 = new Font("Ariel", Font.ITALIC, 20);
+        f3 = new Font("Ariel", Font.PLAIN, 20);
 
         // Cursor for JButtons and Radio Buttons
         cursor = new Cursor(Cursor.HAND_CURSOR);
 
         // Title
         label1 = new JLabel();
-        label1.setText("Which Place Would You");
-        label1.setBounds(430, 25, 500, 50);
+        label1.setText("The Country is Yours to ");
+        label1.setBounds(60, 25, 500, 50);
         label1.setFont(f1);
+        label1.setForeground(Color.decode("#153169"));
         c.add(label1);
+        backgroundPanel.add(label1);
 
         label1 = new JLabel();
-        label1.setText("Like to Visit?");
-        label1.setBounds(430, 60, 500, 50);
+        label1.setText("Explore Where First?");
+        label1.setBounds(60, 65, 500, 50);
+        label1.setForeground(Color.decode("#153169"));
         label1.setFont(f1);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         // Country JButtons
         place1 = new JRadioButton("Cox's Bazar");
-        place1.setBounds(460, 100, 200, 50);
+        place1.setBounds(80, 110, 200, 50);
         place1.setFont(f2);
         place1.setBackground(Color.decode("#F2F2F2"));
+        place1.setOpaque(false);
         place1.setCursor(cursor);
         c.add(place1);
+        backgroundPanel.add(place1);
 
         place2 = new JRadioButton("Sajek Valley");
-        place2.setBounds(460, 140, 200, 50);
+        place2.setBounds(80, 150, 200, 50);
         place2.setFont(f2);
         place2.setBackground(Color.decode("#F2F2F2"));
+        place2.setOpaque(false);
         place2.setCursor(cursor);
         c.add(place2);
+        backgroundPanel.add(place2);
 
         place3 = new JRadioButton("Sreemangal");
-        place3.setBounds(460, 180, 200, 50);
+        place3.setBounds(80, 190, 200, 50);
         place3.setFont(f2);
         place3.setBackground(Color.decode("#F2F2F2"));
+        place3.setOpaque(false);
         place3.setCursor(cursor);
         c.add(place3);
+        backgroundPanel.add(place3);
 
         place4 = new JRadioButton("Bandarban");
-        place4.setBounds(460, 220, 200, 50);
+        place4.setBounds(80, 230, 200, 50);
         place4.setFont(f2);
         place4.setBackground(Color.decode("#F2F2F2"));
+        place4.setOpaque(false);
         place4.setCursor(cursor);
         c.add(place4);
+        backgroundPanel.add(place4);
 
         place5 = new JRadioButton("Rangamati");
-        place5.setBounds(460, 260, 200, 50);
+        place5.setBounds(80, 270, 200, 50);
         place5.setFont(f2);
         place5.setBackground(Color.decode("#F2F2F2"));
+        place5.setOpaque(false);
         place5.setCursor(cursor);
         c.add(place5);
+        backgroundPanel.add(place5);
 
         // To Group JButtons
         jButtonGroup = new ButtonGroup();
@@ -103,28 +148,31 @@ public class DomPlaces extends JFrame {
         jButtonGroup.add(place5);
 
         btn1 = new JButton("Exit");
-        btn1.setBounds(90, 325, 215, 50);
+        btn1.setBounds(50, 340, 215, 50);
         btn1.setFont(f3);
         btn1.setCursor(cursor);
         btn1.setForeground(Color.WHITE);
-        btn1.setBackground(Color.decode("#C00000"));
+        btn1.setBackground(Color.decode("#d1698b"));
         c.add(btn1);
+        backgroundPanel.add(btn1);
 
         btn2 = new JButton("Back");
-        btn2.setBounds(340, 325, 215, 50);
+        btn2.setBounds(310, 340, 215, 50);
         btn2.setFont(f3);
         btn2.setCursor(cursor);
         btn2.setForeground(Color.WHITE);
-        btn2.setBackground(Color.decode("#2E75B6"));
+        btn2.setBackground(Color.decode("#43426E"));;
         c.add(btn2);
+        backgroundPanel.add(btn2);
 
         btn3 = new JButton("Next");
-        btn3.setBounds(590, 325, 215, 50);
+        btn3.setBounds(570, 340, 215, 50);
         btn3.setFont(f3);
         btn3.setCursor(cursor);
         btn3.setForeground(Color.WHITE);
-        btn3.setBackground(Color.decode("#2E75B6"));
+        btn3.setBackground(Color.decode("#43426E"));
         c.add(btn3);
+        backgroundPanel.add(btn3);
 
         nBtn = new JButton("");
         nBtn.setBounds(0, 0, 0, 0);
