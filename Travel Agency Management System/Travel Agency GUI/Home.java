@@ -19,6 +19,7 @@ public class Home extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
+        
         // Icon
         icon = new ImageIcon(getClass().getResource("/images/travel_logo.png"));
         this.setIconImage(icon.getImage());
