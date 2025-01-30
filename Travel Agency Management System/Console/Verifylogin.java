@@ -113,7 +113,7 @@ import java.io.IOException;
 		         if(destination== 1)
 		{
 			
-		         String array[]= new String[]{" Indonesia"," Italy", " South Africa"," Greece"," Germany"}; 
+		         String array[]= new String[]{" Thailand"," Italy", " South Africa"," Greece"," Germany"}; 
 				 
 				 
 		         for(int i=0; i<=array.length-1;  i++)

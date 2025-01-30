@@ -14,6 +14,8 @@ public class Packs extends JFrame {
     private JRadioButton defPacks, selfChosenPacks;
     private ButtonGroup jButtonGroup;
     private int pack = 0;
+    // Add a new instance variable to store selected pack type
+    private String selectedPackType = "";
 
     Packs() {
         // Frame Layout
@@ -142,6 +144,41 @@ public class Packs extends JFrame {
         c.add(btn3);
         backgroundPanel.add(btn3);
 
+        // Inside the Handler class
+        class Handler implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == defPacks) {
+                    pack = 1;
+                    selectedPackType = "Default Pack";
+                } else if (e.getSource() == selfChosenPacks) {
+                    pack = 2;
+                    selectedPackType = "Self-Chosen Pack";
+                }
+            }
+        }
+
+        btn3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                if (pack == 1) {
+                    DataStore.setSelectedPackType(selectedPackType);
+                    System.out.println("Selected Pack: " + DataStore.getSelectedPackType());
+                    setVisible(false);
+                    DefPackTypes frame = new DefPackTypes();
+                    frame.setVisible(true);
+                } else if (pack == 2) {
+                    DataStore.setSelectedPackType(selectedPackType);
+                    System.out.println("Selected Pack: " + DataStore.getSelectedPackType());
+                    setVisible(false);
+                    SelfChoosenPacks frame = new SelfChoosenPacks();
+                    frame.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "You forgot to select package type :(", "Warning!!!",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
         nBtn = new JButton("");
         nBtn.setBounds(0, 0, 0, 0);
         c.add(nBtn);
@@ -166,23 +203,25 @@ public class Packs extends JFrame {
             }
         });
 
-        // Next Button
-        btn3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                if (pack == 1) {
-                    setVisible(false);
-                    DefPackTypes frame = new DefPackTypes();
-                    frame.setVisible(true);
-                } else if (pack == 2) {
-                    setVisible(false);
-                    SelfChoosenPacks frame = new SelfChoosenPacks();
-                    frame.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "You forgot to select package type :(", "Warming!!!",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        });
+        // // Next Button
+        // btn3.addActionListener(new ActionListener() {
+        // public void actionPerformed(ActionEvent ae) {
+        // if (pack == 1) {
+        // setVisible(false);
+        // DefPackTypes frame = new DefPackTypes();
+        // frame.setVisible(true);
+        // } else if (pack == 2) {
+        // setVisible(false);
+        // SelfChoosenPacks frame = new SelfChoosenPacks();
+        // frame.setVisible(true);
+        // } else {
+        // JOptionPane.showMessageDialog(null, "You forgot to select package type :(",
+        // "Warming!!!",
+        // JOptionPane.WARNING_MESSAGE);
+        // }
+        // }
+        // });
+
     }
 
     class Handler implements ActionListener {

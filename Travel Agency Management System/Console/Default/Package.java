@@ -9,7 +9,7 @@ public class Package extends Variable{
 		
 		         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*****************************************************");
-				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*            Available Packs for Indonesia          *");
+				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*            Available Packs for Thailand          *");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*                                                   *");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*****************************************************\n");
 				 

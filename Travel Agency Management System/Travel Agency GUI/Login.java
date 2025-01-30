@@ -16,6 +16,15 @@ public class Login extends JFrame {
     private JButton btn1, btn2, btn3, nBtn;
     private JPasswordField tf2;
     private Cursor cursor;
+    private static String[] userData = new String[6];
+
+    public static void setUserData(String[] data) {
+        userData = data;
+    }
+
+    public static String[] getUserData() {
+        return userData;
+    }
 
     Login() {
         // Frame Layout
@@ -62,7 +71,7 @@ public class Login extends JFrame {
         this.setIconImage(icon.getImage());
 
         // Logo
-        logo = new ImageIcon(getClass().getResource("/images/login1.jpg"));
+        logo = new ImageIcon(getClass().getResource("/images/login1.png"));
         Image scaledImage = logo.getImage().getScaledInstance(500, 600, Image.SCALE_SMOOTH);
         ImageIcon scaledLogo = new ImageIcon(scaledImage);
         imgLabel = new JLabel(scaledLogo);
@@ -181,8 +190,8 @@ public class Login extends JFrame {
                 } else {
 
                     try {
-                        String userNameS = "User Name : " + textField1;
-                        String passwordS = "Password : " + textField2;
+                        String userNameS = "User Name : " + textField1; // User Name : naeem
+                        String passwordS = "Password : " + textField2; // Password : naeem
                         BufferedReader reader = new BufferedReader(new FileReader(".\\Data\\user_data.txt"));
 
                         int totalLines = 0;
@@ -190,13 +199,36 @@ public class Login extends JFrame {
                             totalLines++;
                         reader.close();
 
+
+                        // User Name : naeem     ==    User Name: naeem
+
+
                         for (int i = 0; i <= totalLines; i++) {
-                            String line = Files.readAllLines(Paths.get(".\\Data\\user_data.txt")).get(i);
+                            String line = Files.readAllLines(Paths.get(".\\Data\\user_data.txt")).get(i); // username
                             if (line.equals(userNameS)) {
-                                String line2 = Files.readAllLines(Paths.get(".\\Data\\user_data.txt")).get((i + 1));
+                                String line2 = Files.readAllLines(Paths.get(".\\Data\\user_data.txt")).get((i + 1)); // password
+                                String line3 = Files.readAllLines(Paths.get(".\\Data\\user_data.txt")).get((i + 2)); // email
+
                                 if (line2.equals(passwordS)) {
                                     JOptionPane.showMessageDialog(null, "Login Successful.", "Travel Agency!",
                                             JOptionPane.WARNING_MESSAGE);
+
+                                    // collect specific data form user txt file
+                                    String user_name = line.substring(line.indexOf(": ") + 2);
+                                    String user_email = line3.substring(line3.indexOf(": ") + 2);
+                                    String user_id = UUID.randomUUID().toString().substring(0, 8);
+                                    String package_id = UUID.randomUUID().toString().substring(0, 8);
+                                    String order_id = UUID.randomUUID().toString().substring(0, 8);
+
+                                    // insert it in an array
+                                    userData[0] = order_id;
+                                    userData[1] = package_id;
+                                    userData[2] = user_id;
+                                    userData[3] = user_email;
+                                    userData[4] = user_name;
+                                    userData[5] = "3000";
+
+                                    DataStore.loadUserData();
 
                                     setVisible(false);
                                     Packs frame = new Packs();

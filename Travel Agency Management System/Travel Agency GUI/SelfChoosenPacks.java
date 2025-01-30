@@ -7,7 +7,7 @@ import java.lang.*;
 public class SelfChoosenPacks extends JFrame {
 
     private Container c;
-    private ImageIcon icon, logo;
+    private ImageIcon icon, logo, bg_image;
     private JLabel label0, label1, imgLabel;
     private Font f1, f2, f3, f4, f5, f6;
     private JComboBox cb1, cb2, cb3, cb4, cb5, cb6, cb7;
@@ -17,8 +17,8 @@ public class SelfChoosenPacks extends JFrame {
     SelfChoosenPacks() {
         // Frame Layout
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Travel Agency");
-        this.setSize(900, 480);
+        this.setTitle("Travel Agency Management System");
+        this.setSize(900, 550);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
@@ -26,22 +26,61 @@ public class SelfChoosenPacks extends JFrame {
         c.setLayout(null);
         c.setBackground(Color.decode("#F2F2F2"));
 
+
+
+
+        // Custom Panel for Background
+        JPanel backgroundPanel = new JPanel() {
+            private final Image backgroundImage;
+
+            {
+                // Load the background image
+                bg_image = new ImageIcon(getClass().getResource("/images/France.jpg"));
+                backgroundImage = bg_image.getImage();
+            }
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+
+                // Draw the background image with opacity, scaled to fit panel dimensions
+                float opacity = 0.4f; // Adjust as needed
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+                g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
+                // Reset the composite to default for other components
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+            }
+        };
+
+        backgroundPanel.setLayout(null); // Use null layout for custom positioning
+        setContentPane(backgroundPanel); // Set custom panel as content pane
+
+
+
+
+
+
+
+
         // Icon
-        icon = new ImageIcon(getClass().getResource("/images/Icon.png"));
+        icon = new ImageIcon(getClass().getResource("/images/Travel_logo.png"));
         this.setIconImage(icon.getImage());
 
-        // Logo
-        logo = new ImageIcon(getClass().getResource("/images/LogoBlue.png"));
-        imgLabel = new JLabel(logo);
-        imgLabel.setBounds(30, 65, logo.getIconWidth(), logo.getIconHeight());
-        c.add(imgLabel);
+        // // Logo
+        // logo = new ImageIcon(getClass().getResource("/images/LogoBlue.png"));
+        // imgLabel = new JLabel(logo);
+        // imgLabel.setBounds(30, 65, logo.getIconWidth(), logo.getIconHeight());
+        // c.add(imgLabel);
+        // backgroundPanel.add(imgLabel);
 
         // Fonts
-        f1 = new Font("Segoe UI Black", Font.PLAIN, 35);
-        f2 = new Font("Segoe UI Black", Font.PLAIN, 25);
+        f1 = new Font("Serif", Font.BOLD, 35);
+        f2 = new Font("Ariel", Font.PLAIN, 20);
         f3 = new Font("Segoe UI Semibold", Font.PLAIN, 35);
-        f4 = new Font("Segoe UI", Font.PLAIN, 25);
-        f5 = new Font("Segoe UI", Font.PLAIN, 19);
+        f4 = new Font("Segoe UI", Font.ITALIC, 15);
+        f5 = new Font("Segoe UI", Font.PLAIN, 15);
         f6 = new Font("Segoe UI", Font.PLAIN, 25);
 
         // Cursor for JButtons
@@ -50,151 +89,171 @@ public class SelfChoosenPacks extends JFrame {
         // Title
         label1 = new JLabel();
         label1.setText("Select Tour Details");
-        label1.setBounds(430, 25, 500, 50);
+        label1.setBounds(300, 25, 500, 50);
+        label1.setForeground(Color.decode("#153169"));
         label1.setFont(f1);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         // Tour Type
         label1 = new JLabel();
         label1.setText("Tour Type");
-        label1.setBounds(430, 75, 500, 50);
+        label1.setBounds(150, 90, 500, 50);
         label1.setFont(f4);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         String[] cb1Str = { "Choose tour type...", "International", "Domestic" };
         cb1 = new JComboBox(cb1Str);
-        cb1.setBounds(580, 84, 250, 30);
+        cb1.setBounds(150, 130, 250, 30);
         cb1.setSelectedIndex(0);
         cb1.setFont(f5);
         cb1.setBackground(Color.WHITE);
         c.add(cb1);
+        backgroundPanel.add(cb1);
 
         // Country
         label0 = new JLabel();
         label0.setText("Destination");
-        label0.setBounds(430, 110, 500, 50);
+        label0.setBounds(150, 160, 500, 50);
         label0.setFont(f4);
         c.add(label0);
+        backgroundPanel.add(label0);
 
         String[] cb2Str = { "Choose tour type first!" };
         cb2 = new JComboBox(cb2Str);
-        cb2.setBounds(580, 119, 250, 30);
+        cb2.setBounds(150, 200, 250, 30);
         cb2.setSelectedIndex(0);
         cb2.setFont(f5);
         cb2.setBackground(Color.WHITE);
         cb2.disable();
         c.add(cb2);
+        backgroundPanel.add(cb2);
 
         // Person
         label1 = new JLabel();
         label1.setText("Person");
-        label1.setBounds(430, 145, 500, 50);
+        label1.setBounds(150, 230, 500, 50);
         label1.setFont(f4);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         String[] cb3Str = { "Total person number...", "1", "2", "3", "4", "5" };
         cb3 = new JComboBox(cb3Str);
-        cb3.setBounds(580, 154, 250, 30);
+        cb3.setBounds(150, 270, 250, 30);
         cb3.setSelectedIndex(0);
         cb3.setFont(f5);
         cb3.setBackground(Color.WHITE);
         c.add(cb3);
+        backgroundPanel.add(cb3);
 
         // Days
         label1 = new JLabel();
         label1.setText("Total Days");
-        label1.setBounds(430, 180, 500, 50);
+        label1.setBounds(150, 300, 500, 50);
         label1.setFont(f4);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         String[] cb4Str = { "Number of days...", "1", "2", "3", "4", "5", "6", "7" };
         cb4 = new JComboBox(cb4Str);
-        cb4.setBounds(580, 189, 250, 30);
+        cb4.setBounds(150, 340, 250, 30);
         cb4.setSelectedIndex(0);
         cb4.setFont(f5);
         cb4.setBackground(Color.WHITE);
         c.add(cb4);
+        backgroundPanel.add(cb4);
 
         // Hotel
         label1 = new JLabel();
         label1.setText("Hotel Type");
-        label1.setBounds(430, 215, 500, 50);
+        label1.setBounds(500, 90, 500, 50);
         label1.setFont(f4);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         String[] cb5Str = { "Select tour type first!" };
         cb5 = new JComboBox(cb5Str);
-        cb5.setBounds(580, 224, 250, 30);
+        cb5.setBounds(500, 130, 250, 30);
         cb5.setSelectedIndex(0);
         cb5.setFont(f5);
         cb5.setBackground(Color.WHITE);
         cb5.disable();
         c.add(cb5);
+        backgroundPanel.add(cb5);
 
         // Travel By
         label1 = new JLabel();
         label1.setText("Travel By");
-        label1.setBounds(430, 250, 500, 50);
+        label1.setBounds(500, 160, 500, 50);
         label1.setFont(f4);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         String[] cb6Str = { "Select tour type first!" };
         cb6 = new JComboBox(cb6Str);
-        cb6.setBounds(580, 259, 250, 30);
+        cb6.setBounds(500, 200, 250, 30);
         cb6.setSelectedIndex(0);
         cb6.setFont(f5);
         cb6.setBackground(Color.WHITE);
         cb6.disable();
         c.add(cb6);
+        backgroundPanel.add(cb6);
 
         // Vehicle Type
         label1 = new JLabel();
         label1.setText("Vehicle Type");
-        label1.setBounds(430, 285, 500, 50);
+        label1.setBounds(500, 230, 500, 50);
         label1.setFont(f4);
         c.add(label1);
+        backgroundPanel.add(label1);
 
         String[] cb7Str = { "Select vehicle first!" };
         cb7 = new JComboBox(cb7Str);
-        cb7.setBounds(580, 296, 250, 30);
+        cb7.setBounds(500, 270, 250, 30);
         cb7.setSelectedIndex(0);
         cb7.setFont(f5);
         cb7.setBackground(Color.WHITE);
         cb7.disable();
         c.add(cb7);
+        backgroundPanel.add(cb7);
 
         // JButtons
         btn1 = new JButton("Exit");
-        btn1.setBounds(53, 355, 183, 50);
+        btn1.setBounds(53, 410, 180, 50);
         btn1.setFont(f2);
         btn1.setCursor(cursor);
         btn1.setForeground(Color.WHITE);
-        btn1.setBackground(Color.decode("#C00000"));
+        btn1.setBackground(Color.decode("#d1698b"));
         c.add(btn1);
+        backgroundPanel.add(btn1);
 
         btn2 = new JButton("Back");
-        btn2.setBounds(251, 355, 183, 50);
+        btn2.setBounds(251, 410, 180, 50);
         btn2.setFont(f2);
         btn2.setCursor(cursor);
         btn2.setForeground(Color.WHITE);
-        btn2.setBackground(Color.decode("#2E75B6"));
+        btn2.setBackground(Color.decode("#7c4e85"));
         c.add(btn2);
+        backgroundPanel.add(btn2);
 
         btn4 = new JButton("Reset");
-        btn4.setBounds(450, 355, 183, 50);
+        btn4.setBounds(450, 410, 180, 50);
         btn4.setFont(f2);
         btn4.setCursor(cursor);
         btn4.setForeground(Color.WHITE);
-        btn4.setBackground(Color.decode("#2E75B6"));
+        btn4.setBackground(Color.decode("#7c4e85"));
         c.add(btn4);
+        backgroundPanel.add(btn4);
 
         btn3 = new JButton("Next");
-        btn3.setBounds(649, 355, 183, 50);
+        btn3.setBounds(650, 410, 180, 50);
         btn3.setFont(f2);
         btn3.setCursor(cursor);
         btn3.setForeground(Color.WHITE);
-        btn3.setBackground(Color.decode("#2E75B6"));
+        btn3.setBackground(Color.decode("#7c4e85"));
         c.add(btn3);
+        backgroundPanel.add(btn3);
 
         nBtn = new JButton("");
         nBtn.setBounds(0, 0, 0, 0);
@@ -225,8 +284,8 @@ public class SelfChoosenPacks extends JFrame {
                     cb2.addItem("Italy");
                     cb2.addItem("Germany");
                     cb2.addItem("Greece");
-                    cb2.addItem("Indonesia");
-                    cb2.addItem("South Africa");
+                    cb2.addItem("Thailand");
+                    cb2.addItem("South Korea");
                     cb2.enable();
                     cb5.removeAllItems();
                     cb5.addItem("Choose hotel type...");

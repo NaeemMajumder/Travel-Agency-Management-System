@@ -35,7 +35,7 @@ public class RunPackage extends Package {
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*           Choose your travel destination          *");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*                                                   *");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*****************************************************\n");
-				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t                  1. Indonesia");
+				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t                  1. Thailand");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t                  2. Italy");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t                  3. South Africa");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t-----------------------------------------------------\n");

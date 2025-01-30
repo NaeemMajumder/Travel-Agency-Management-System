@@ -87,7 +87,7 @@ public class SouthAfrica extends Italy
 			}
 			    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*****************************************************");
-				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*            Popular places in Indonesia            *");
+				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*            Popular places in Thailand            *");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*                                                   *");
 				 System.out.println("\t\t\t\t\t\t\t\t\t\t\t*****************************************************\n");
 				 String array[]=new String []{" Robben Island"," Boulder Beach"," Maclear's Beacon"," Cape of Good Hope"," Kruger National Park"};

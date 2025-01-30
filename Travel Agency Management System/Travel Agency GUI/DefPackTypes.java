@@ -15,6 +15,8 @@ public class DefPackTypes extends JFrame {
     private JRadioButton international, domestic;
     private ButtonGroup radioButtonGroup;
     private int defPack = 0;
+    // Add a new instance variable to store selected pack type
+    private String selectedDefaultPack = "";
 
     DefPackTypes() {
         // Frame Layout
@@ -67,9 +69,7 @@ public class DefPackTypes extends JFrame {
         // c.add(imgLabel);
         // backgroundPanel.add(imgLabel);
 
-
-
-        ImageIcon domestic_img = new ImageIcon(getClass().getResource("/images/domestic.jpg"));
+        ImageIcon domestic_img = new ImageIcon(getClass().getResource("/images/domestic.png"));
         Image DomesticImage = domestic_img.getImage().getScaledInstance(250, 150, Image.SCALE_SMOOTH);
         ImageIcon domesticScaled = new ImageIcon(DomesticImage);
 
@@ -77,21 +77,13 @@ public class DefPackTypes extends JFrame {
         imgLabel.setBounds(320, 70, 300, 220);
         backgroundPanel.add(imgLabel);
 
-
-        ImageIcon international_img = new ImageIcon(getClass().getResource("/images/international.jpg"));
+        ImageIcon international_img = new ImageIcon(getClass().getResource("/images/international.jpeg"));
         Image internationalImage = international_img.getImage().getScaledInstance(250, 150, Image.SCALE_SMOOTH);
         ImageIcon internationalScaled = new ImageIcon(internationalImage);
 
         imgLabel = new JLabel(internationalScaled);
         imgLabel.setBounds(40, 70, 300, 220);
         backgroundPanel.add(imgLabel);
-
-
-
-
-
-
-
 
         // Fonts
         f1 = new Font("Serif", Font.BOLD, 35);
@@ -143,7 +135,6 @@ public class DefPackTypes extends JFrame {
         c.add(btn1);
         backgroundPanel.add(btn1);
 
-
         btn2 = new JButton("Back");
         btn2.setBounds(650, 175, 160, 45);
         btn2.setFont(f3);
@@ -161,6 +152,41 @@ public class DefPackTypes extends JFrame {
         btn3.setBackground(Color.decode("#43426E"));
         c.add(btn3);
         backgroundPanel.add(btn3);
+
+        // Inside the Handler class
+        class Handler implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == domestic) {
+                    defPack = 1;
+                    selectedDefaultPack = "domestic";
+                } else if (e.getSource() == international) {
+                    defPack = 2;
+                    selectedDefaultPack = "international";
+                }
+            }
+        }
+
+        btn3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                if (defPack == 1) {
+                    DataStore.setSelectedDefPack(selectedDefaultPack);
+                    System.out.println("Selected Default Pack: " + DataStore.getSelectedDefPack());
+                    setVisible(false);
+                    DomPlaces frame = new DomPlaces();
+                    frame.setVisible(true);
+                } else if (defPack == 2) {
+                    DataStore.setSelectedDefPack(selectedDefaultPack);
+                    System.out.println("Selected Default Pack: " + DataStore.getSelectedDefPack());
+                    setVisible(false);
+                    IntCountries frame = new IntCountries();
+                    frame.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select tour type.", "Warning!!!",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
 
         nBtn = new JButton("");
         nBtn.setBounds(0, 0, 0, 0);
@@ -186,25 +212,25 @@ public class DefPackTypes extends JFrame {
             }
         });
 
-        // Next Button
-        btn3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                if (defPack == 1) {
-                    IntCountries frame = new IntCountries();
-                    frame.setVisible(true);
-                    setVisible(false);
-                    dispose();
-                } else if (defPack == 2) {
-                    DomPlaces frame = new DomPlaces();
-                    frame.setVisible(true);
-                    setVisible(false);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please select tour type.", "Warning!",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        });
+        // // Next Button
+        // btn3.addActionListener(new ActionListener() {
+        // public void actionPerformed(ActionEvent ae) {
+        // if (defPack == 1) {
+        // IntCountries frame = new IntCountries();
+        // frame.setVisible(true);
+        // setVisible(false);
+        // dispose();
+        // } else if (defPack == 2) {
+        // DomPlaces frame = new DomPlaces();
+        // frame.setVisible(true);
+        // setVisible(false);
+        // dispose();
+        // } else {
+        // JOptionPane.showMessageDialog(null, "Please select tour type.", "Warning!",
+        // JOptionPane.WARNING_MESSAGE);
+        // }
+        // }
+        // });
     }
 
     class Handler implements ActionListener {

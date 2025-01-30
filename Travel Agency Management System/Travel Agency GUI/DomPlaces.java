@@ -43,7 +43,7 @@ public class DomPlaces extends JFrame {
                 Graphics2D g2d = (Graphics2D) g;
 
                 // Draw the background image with opacity, scaled to fit panel dimensions
-                float opacity = 0.2f; // Adjust as needed
+                float opacity = 0.4f; // Adjust as needed
                 g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
                 g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
@@ -60,13 +60,15 @@ public class DomPlaces extends JFrame {
         this.setIconImage(icon.getImage());
 
         // logo
-        ImageIcon logo = new ImageIcon(getClass().getResource("/images/travel_logo.png"));
-        Image logoImage = logo.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
-        ImageIcon logoScaled = new ImageIcon(logoImage);
+        // ImageIcon logo = new
+        // ImageIcon(getClass().getResource("/images/travel_logo.png"));
+        // Image logoImage = logo.getImage().getScaledInstance(400, 400,
+        // Image.SCALE_SMOOTH);
+        // ImageIcon logoScaled = new ImageIcon(logoImage);
 
-        imgLabel = new JLabel(logoScaled);
-        imgLabel.setBounds(380, -20, 400, 400);
-        backgroundPanel.add(imgLabel);
+        // imgLabel = new JLabel(logoScaled);
+        // imgLabel.setBounds(380, -20, 400, 400);
+        // backgroundPanel.add(imgLabel);
 
         // Fonts
         f1 = new Font("Serif", Font.BOLD, 30);
@@ -161,7 +163,8 @@ public class DomPlaces extends JFrame {
         btn2.setFont(f3);
         btn2.setCursor(cursor);
         btn2.setForeground(Color.WHITE);
-        btn2.setBackground(Color.decode("#43426E"));;
+        btn2.setBackground(Color.decode("#43426E"));
+        ;
         c.add(btn2);
         backgroundPanel.add(btn2);
 
@@ -173,6 +176,28 @@ public class DomPlaces extends JFrame {
         btn3.setBackground(Color.decode("#43426E"));
         c.add(btn3);
         backgroundPanel.add(btn3);
+
+        class Handler implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String place = ""; // Use a String to store the selected place
+
+                if (e.getSource() == place1) {
+                    place = "Cox's Bazar"; // Set the place name as a string
+                } else if (e.getSource() == place2) {
+                    place = "Sajek Valley";
+                } else if (e.getSource() == place3) {
+                    place = "Sreemangal";
+                } else if (e.getSource() == place4) {
+                    place = "Bandarban";
+                } else if (e.getSource() == place5) {
+                    place = "Rangamati";
+                }
+
+                // Store the selected place in DataStore as a string
+                DataStore.setSelectedPlace(place);
+            }
+        }
 
         nBtn = new JButton("");
         nBtn.setBounds(0, 0, 0, 0);
@@ -202,54 +227,86 @@ public class DomPlaces extends JFrame {
             }
         });
 
-        // Next Button
+        // // Next Button
+        // btn3.addActionListener(new ActionListener() {
+        // public void actionPerformed(ActionEvent ae) {
+        // if (place == 1) {
+        // setVisible(false);
+        // DomesticCoxsBazar frame = new DomesticCoxsBazar();
+        // frame.setVisible(true);
+        // } else if (place == 2) {
+        // setVisible(false);
+        // DomesticSajekValley frame = new DomesticSajekValley();
+        // frame.setVisible(true);
+        // } else if (place == 3) {
+        // setVisible(false);
+        // DomesticSreemangal frame = new DomesticSreemangal();
+        // frame.setVisible(true);
+        // } else if (place == 4) {
+        // setVisible(false);
+        // DomesticBandarban frame = new DomesticBandarban();
+        // frame.setVisible(true);
+        // } else if (place == 5) {
+        // setVisible(false);
+        // DomesticRangamati frame = new DomesticRangamati();
+        // frame.setVisible(true);
+        // } else {
+        // JOptionPane.showMessageDialog(null, "Please select Place.", "Warning!!!",
+        // JOptionPane.WARNING_MESSAGE);
+        // }
+        // }
+        // });
+
         btn3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                if (place == 1) {
+                String selectedPlace = DataStore.getSelectedPlace(); // Get the selected place as a String
+
+                if ("Cox's Bazar".equals(selectedPlace)) {
                     setVisible(false);
                     DomesticCoxsBazar frame = new DomesticCoxsBazar();
                     frame.setVisible(true);
-                } else if (place == 2) {
+                } else if ("Sajek Valley".equals(selectedPlace)) {
                     setVisible(false);
                     DomesticSajekValley frame = new DomesticSajekValley();
                     frame.setVisible(true);
-                } else if (place == 3) {
+                } else if ("Sreemangal".equals(selectedPlace)) {
                     setVisible(false);
                     DomesticSreemangal frame = new DomesticSreemangal();
                     frame.setVisible(true);
-                } else if (place == 4) {
+                } else if ("Bandarban".equals(selectedPlace)) {
                     setVisible(false);
                     DomesticBandarban frame = new DomesticBandarban();
                     frame.setVisible(true);
-                } else if (place == 5) {
+                } else if ("Rangamati".equals(selectedPlace)) {
                     setVisible(false);
                     DomesticRangamati frame = new DomesticRangamati();
                     frame.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Please select Place.", "Warning!!!",
+                    JOptionPane.showMessageDialog(null, "Please select a place.", "Warning!!!",
                             JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
+
     }
 
-    class Handler implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+    // class Handler implements ActionListener {
+    //     @Override
+    //     public void actionPerformed(ActionEvent e) {
 
-            if (e.getSource() == place1) {
-                place = 1;
-            } else if (e.getSource() == place2) {
-                place = 2;
-            } else if (e.getSource() == place3) {
-                place = 3;
-            } else if (e.getSource() == place4) {
-                place = 4;
-            } else if (e.getSource() == place5) {
-                place = 5;
-            }
-        }
-    }
+    //         if (e.getSource() == place1) {
+    //             place = 1;
+    //         } else if (e.getSource() == place2) {
+    //             place = 2;
+    //         } else if (e.getSource() == place3) {
+    //             place = 3;
+    //         } else if (e.getSource() == place4) {
+    //             place = 4;
+    //         } else if (e.getSource() == place5) {
+    //             place = 5;
+    //         }
+    //     }
+    // }
 
     public static void main(String[] args) {
 

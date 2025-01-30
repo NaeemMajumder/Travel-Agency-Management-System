@@ -81,14 +81,6 @@ public class Welcome extends JFrame {
             }
         });
 
-        // Contribution Button
-        btn2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-
-                Contribution frame = new Contribution();
-                frame.setVisible(true);
-            }
-        });
 
         // Next Button
         btn3.addActionListener(new ActionListener() {
